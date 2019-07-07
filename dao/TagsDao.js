@@ -1,6 +1,7 @@
 var dbUtil = require("./DBUtil");
 
 function insertTags(name, success) {
+    console.log("insertTags: name:" + name);
     var sql = "insert into tags (`name`) values (?);";
     var params = [name];
     var connection = dbUtil.createConnection();

@@ -54,23 +54,16 @@
             form.append("author", author);
             form.append("tags", tags);
             form.append("content", content);
-            // var data = {
-            //     title: title,
-            //     author: author,
-            //     tags: tags,
-            //     content: content
-            // }
 
             var xhr = new XMLHttpRequest();
-            xhr.open("post", "/blog/addBlog");
-            xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            xhr.open("get", "/blog/addBlog?title=" + title + "&author=" + author + "&tags=" + tags + "&content=" + content);
             // xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
             xhr.onreadystatechange = function() {
                 if (xhr.status == 200 && xhr.readyState == 4) {
                     console.log(xhr.responseText);
                 }
             }
-            xhr.send(form);
+            xhr.send();
         }
     </script>
 </head>
