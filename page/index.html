@@ -1,10 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-for="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="css/base.css" rel="stylesheet" />
+    <link href="css/index.css" rel="stylesheet"/>
 </head>
 <body>
-    hello
+    <nav class="header">
+        <div class="header_content">
+            <span>Panda个人博客 | 技术博客</span>
+            <ul>
+                <li><a href="#">首页</a></li>
+                <li><a href="#">地图</a></li>
+                <li><a href="#">关于</a></li>
+                <li><a href="#">留言</a></li>
+            </ul>
+            <input type="text" placeholder="输入关键词查找" />
+            <button>搜索</button>
+        </div>
+    </nav>
+    <div class="content">
+        <div class="content_left">
+            <div id="everyDay">
+                <span class="everyDayTitle">每日一句</span>
+                <p>asdsajdaldsljadlkajdslkajslkdjadslkalkdsjalksdjl</p>
+            </div>
+        </div>
+        <div class="content_right">
+            <div id="tags_cloud">
+                <span>随机标签云</span>
+                <div><a v-for="(key, index) of tags" v-bind:href="key.url" :style="{color:randColor(), fontSize: randSize()}">{{key.tag}}</a></div>
+            </div>
+            <div id="hot_blog">
+                <span>最近热门</span>
+                <ul>
+                    <li v-for="(key, index) of blogList"><a v-bind:href="key.url">{{key.name}}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <script src="./js/axios.js"></script>
+    <script type="text/javascript" src="./js/vue.js"></script>
+    <script src="./js/base.js"></script>
+    <script src="./js/index.js"></script>
 </body>
 </html>

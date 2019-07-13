@@ -1,16 +1,17 @@
 var app = require("../express");
-var multiparty = require("multiparty");
 var url = require("url");
 var blogDao = require("../dao/BlogDao");
 var tagsDao = require("../dao/TagsDao");
 var blogTagsMappingDao = require("../dao/BlogTagsMappingDao");
 var timeUtil = require("../util/TimeUtil");
+var bodyParser = require("body-parser");
+var urlencodedParser = bodyParser.urlencoded({ extended: true });
+var jsonParser = bodyParser.json();
 
-app.get("/blog/addBlog", function (request, response) {
-    var params = url.parse(request.url, true).query;
-    console.log(params);
-    blogDao.insertBlog(params.title, params.author, params.content, 0, timeUtil.getNow(), function (blogResult) {
-        let tags = params.tags.split(",");
+app.post("/blog/addBlog", jsonParser, function (request, response) {
+    console.log(request.body);
+    blogDao.insertBlog(request.body.title, request.body.author, request.body.content, 0, timeUtil.getNow(), function (blogResult) {
+        let tags = request.body.tags.split(",");
         for (let i = 0 ; i < tags.length ; i ++) {
             tagsDao.queryTags(tags[i], function (tagsResult) {
                if (tagsResult.length > 0) {//有这个标签，
@@ -23,6 +24,13 @@ app.get("/blog/addBlog", function (request, response) {
             });
         }
         response.writeHead(200);
-        response.end("ok");
+        response.end(JSON.stringify({status: 1, msg: "ok"}));
+    });
+});
+
+app.get("/getHotBlog", function (request, response) {
+    blogDao.queryBlogByViews(function (result) {
+       response.writeHead(200);
+       response.end(JSON.stringify(result));
     });
 });

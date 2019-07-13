@@ -31,5 +31,20 @@ function queryTags(name, success) {
     connection.end();
 }
 
+function queryAllTags(success) {
+    var sql = "select * from tags;";
+    var connection = dbUtil.createConnection();
+    connection.connect();
+    connection.query(sql, function (error, result) {
+        if (error) {
+            console.log(error);
+        } else {
+            success(result);
+        }
+    });
+    connection.end();
+}
+
 module.exports.insertTags = insertTags;
 module.exports.queryTags = queryTags;
+module.exports.queryAllTags = queryAllTags;

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="./wangEditor/wangEditor.js"></script>
+    <script src="./js/axios.js"></script>
     <link href="./wangEditor/wangEditor.css">
 
     <style>
@@ -47,23 +48,39 @@
             var title = document.getElementById("title").value;
             var author = document.getElementById("author").value;
             var tags = document.getElementById("tags").value;
-            var content = editor.txt.html();
+            var content = encodeURI(editor.txt.html());
 
-            var form = new FormData();
-            form.append("title", title);
-            form.append("author", author);
-            form.append("tags", tags);
-            form.append("content", content);
-
-            var xhr = new XMLHttpRequest();
-            xhr.open("get", "/blog/addBlog?title=" + title + "&author=" + author + "&tags=" + tags + "&content=" + content);
-            // xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-            xhr.onreadystatechange = function() {
-                if (xhr.status == 200 && xhr.readyState == 4) {
-                    console.log(xhr.responseText);
-                }
+            var data = {
+                title: title,
+                author: author,
+                tags: tags,
+                content: content
             }
-            xhr.send();
+
+            axios({
+                url: "/blog/addBlog",
+                method: "post",
+                data: data
+            }).then(function (resp) {
+                alert(resp.data);
+            });
+
+            // var form = new FormData();
+            // form.append("title", title);
+            // form.append("author", author);
+            // form.append("tags", tags);
+            // form.append("content", content);
+            //
+            // var xhr = new XMLHttpRequest();
+            // xhr.open("post", "/blog/addBlog");
+            // // xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            // xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded;charset=utf-8');
+            // xhr.onreadystatechange = function() {
+            //     if (xhr.status == 200 && xhr.readyState == 4) {
+            //         console.log(xhr.responseText);
+            //     }
+            // }
+            // xhr.send(form);
         }
     </script>
 </head>
