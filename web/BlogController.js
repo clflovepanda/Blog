@@ -9,8 +9,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: true });
 var jsonParser = bodyParser.json();
 
 app.post("/blog/addBlog", jsonParser, function (request, response) {
-    console.log(request.body);
-    blogDao.insertBlog(request.body.title, request.body.author, request.body.content, 0, timeUtil.getNow(), function (blogResult) {
+    blogDao.insertBlog(request.body.title, request.body.author, decodeURI(request.body.content), 0, timeUtil.getNow(), request.body.tags, function (blogResult) {
         let tags = request.body.tags.split(",");
         for (let i = 0 ; i < tags.length ; i ++) {
             tagsDao.queryTags(tags[i], function (tagsResult) {
@@ -28,9 +27,35 @@ app.post("/blog/addBlog", jsonParser, function (request, response) {
     });
 });
 
-app.get("/getHotBlog", function (request, response) {
+app.get("/blog/getHotBlog", function (request, response) {
     blogDao.queryBlogByViews(function (result) {
        response.writeHead(200);
        response.end(JSON.stringify(result));
     });
+});
+
+app.get("/blog/getBlogByPage", function (request, response) {
+    var params = url.parse(request.url, true).query;
+    var offset = params.offset;
+    var limit = params.limit;
+    blogDao.queryBlogByPage(parseInt(offset), parseInt(limit), function (result) {
+        for (var i = 0 ; i < result.length ; i ++) {
+            result[i].content = result[i].content.replace(/<[a-zA-Z]+>/g, "");
+            result[i].content = result[i].content.replace(/<\/[a-zA-Z]+>/g, "");
+            result[i].content = result[i].content.replace(/<img src="data:image\/jpeg;[\w\W]+>/g, "");
+            result[i].ctime = timeUtil.timeFormat(result[i].ctime);
+            if (result[i].content.length > 300) {
+                result[i].content = result[i].content.substr(0, 300);
+            }
+        }
+        response.writeHead(200);
+        response.end(JSON.stringify(result));
+    });
+});
+
+app.get("/blog/getTotalBlogCount", function (request, response) {
+   blogDao.queryBlogCount(function (result) {
+       response.writeHead(200);
+       response.end(JSON.stringify(result));
+   }) 
 });

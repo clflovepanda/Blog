@@ -29,7 +29,6 @@ var tagsCloud = new Vue({
             url: "/getTagsCloud",
             method: "get"
         }).then(function (resp) {
-            console.log(resp.data);
             var result = [];
             for (var i = 0 ; i < resp.data.length ; i ++) {
                 result.push({tag: resp.data[i].name, url: "http://www.baidu.com"})
@@ -49,7 +48,6 @@ var hotBlog = new Vue({
             url: "/getHotBlog",
             method: "get"
         }).then(function (resp) {
-            console.log(resp.data);
             var result = [];
             for (var i = 0 ; i < resp.data.length ; i ++) {
                 result.push({name: resp.data[i].title, url: "http://www.baidu.com"})

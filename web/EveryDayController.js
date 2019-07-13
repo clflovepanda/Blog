@@ -11,3 +11,10 @@ app.get("/blog/addEveryDay", function (request, response) {
     });
 });
 
+app.get("/blog/getEveryDay", function (request, response) {
+    everyDayDao.queryLastEveryDay(function (result) {
+        response.writeHead(200);
+        response.end(JSON.stringify(result));
+    });
+});
+

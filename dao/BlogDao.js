@@ -1,9 +1,9 @@
 var dbUtil = require("./DBUtil");
 var timeUtil = require("../util/TimeUtil");
 
-function insertBlog(title, author, content, views, ctime, success) {
-    var sql = "insert into blog (`title`, `author`, `content`, `views`, `ctime`) values (?, ?, ?, ?, ?);";
-    var params = [title, author, content, views, ctime];
+function insertBlog(title, author, content, views, ctime, tags, success) {
+    var sql = "insert into blog (`title`, `author`, `content`, `views`, `ctime`, `tags`) values (?, ?, ?, ?, ?, ?);";
+    var params = [title, author, content, views, ctime, tags];
     var connection = dbUtil.createConnection();
     connection.connect();
     connection.query(sql, params, function (error, result) {
@@ -70,11 +70,11 @@ function queryBlogCount(success) {
     connection.end();
 }
 function queryBlogByPage(offset, limit, success) {
-    var sql = "select * from blog order by id desc limit ?, ?;";
+    var sql = "select * from blog order by id desc limit ?,?;";
     var params = [offset, limit];
     var connection = dbUtil.createConnection();
     connection.connect();
-    connection.query(sql, function (error, result) {
+    connection.query(sql, params, function (error, result) {
         if (error) {
             console.log(error);
         } else {

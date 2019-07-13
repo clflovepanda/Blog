@@ -24,7 +24,23 @@
         <div class="content_left">
             <div id="everyDay">
                 <span class="everyDayTitle">每日一句</span>
-                <p>asdsajdaldsljadlkajdslkajslkdjadslkalkdsjalksdjl</p>
+                <p>{{content}}</p>
+            </div>
+            <div id="blogList">
+                <ul>
+                    <li v-for="(key, index) of list">
+                        <span>{{key.title}}</span>
+                        <p>{{key.content}}</p>
+                        <div><span>发布于{{key.ctime}} |  浏览({{key.views}}) | Tags：{{key.tags}}</span></div>
+                    </li>
+                </ul>
+            </div>
+            <div id="pageTools">
+                <ul>
+                    <li v-for="(key, index) of pageList">
+                        <span @click="changePage(key.pageNum)" v-bind:class="{selectOn: key.text==nowPage}">{{key.text}}</span>
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="content_right">
