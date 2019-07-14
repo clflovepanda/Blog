@@ -29,7 +29,7 @@
             <div id="blogList">
                 <ul>
                     <li v-for="(key, index) of list">
-                        <span>{{key.title}}</span>
+                        <span @click="jumpTo(key.id)">{{key.title}}</span>
                         <p>{{key.content}}</p>
                         <div><span>发布于{{key.ctime}} |  浏览({{key.views}}) | Tags：{{key.tags}}</span></div>
                     </li>
@@ -56,6 +56,7 @@
             </div>
         </div>
     </div>
+    <!--<footer>Copyright © 2010-2019 郑晓个人博客 All rights reserved. 由免费开源的WordPress强力驱动. 鲁ICP备14017955号站长统计</footer>-->
     <script src="./js/axios.js"></script>
     <script type="text/javascript" src="./js/vue.js"></script>
     <script src="./js/base.js"></script>

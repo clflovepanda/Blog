@@ -56,3 +56,8 @@ var hotBlog = new Vue({
         });
     }
 });
+
+// window.onload = function () {
+//     var footer = document.getElementsByTagName("footer")[0];
+//     footer.style.top = (document.body.scrollHeight + 30) + "px";
+// }

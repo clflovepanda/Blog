@@ -59,3 +59,17 @@ app.get("/blog/getTotalBlogCount", function (request, response) {
        response.end(JSON.stringify(result));
    }) 
 });
+
+app.get("/blog/getBlogDetail", function (request, response) {
+   var params = url.parse(request.url, true).query;
+   if (!params.id) {
+       response.writeHead(400);
+       response.end("must be have param id");
+       return;
+   }
+   blogDao.queryBlogById(parseInt(params.id), function (result) {
+       response.writeHead(200);
+       response.end(JSON.stringify(result));
+       return;
+   })
+});

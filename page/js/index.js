@@ -19,7 +19,11 @@ var blogList = new Vue({
         list: []
     },
     computed: {
-
+        jumpTo: function () {
+            return function (id) {
+                location.href = "/blogDetail.html?id=" + id;
+            }
+        }
     },
     created: function () {
         axios({

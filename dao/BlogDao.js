@@ -83,12 +83,25 @@ function queryBlogByPage(offset, limit, success) {
     });
     connection.end();
 }
-
 function queryBlogByViews(success) {
     var sql = "select * from blog order by views desc limit 10;";
     var connection = dbUtil.createConnection();
     connection.connect();
     connection.query(sql, function (error, result) {
+        if (error) {
+            console.log(error);
+        } else {
+            success(result);
+        }
+    });
+    connection.end();
+}
+function queryBlogById(id, success) {
+    var sql = "select * from blog where id = ?;";
+    var params = [id];
+    var connection = dbUtil.createConnection();
+    connection.connect();
+    connection.query(sql, params, function (error, result) {
         if (error) {
             console.log(error);
         } else {
@@ -105,5 +118,5 @@ module.exports.queryAllBlog = queryAllBlog;
 module.exports.queryBlogCount = queryBlogCount;
 module.exports.queryBlogByPage = queryBlogByPage;
 module.exports.queryBlogByViews = queryBlogByViews;
-
+module.exports.queryBlogById = queryBlogById;
 
