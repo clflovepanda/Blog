@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link href="css/base.css" rel="stylesheet" />
-    <link href="css/blogDetail.css" rel="stylesheet">
+    <link href="css/comment.css" rel="stylesheet" />
 </head>
 <body>
 <nav class="header">
@@ -22,10 +22,16 @@
 </nav>
 <div class="content">
     <div class="content_left">
-        <div id="blogDetail">
-            <h1>{{content.title}}</h1>
-            <span>作者: {{content.author}} 发布于: {{content.ctime}} 浏览({{content.views}})</span>
-            <div id="blog_content" v-html="content.content"></div>
+        <div id="comment">
+            <p>
+                欢迎灌水交流，别看我长时间不发博，博主可一直都在线~<br/>
+                <br/>
+                友链只交换技术类个人博客。<br/>
+                <br/>
+                不要皮，谢谢。<br/>
+                <br/>
+                博主联系:MzcxNjA0Nzg1<br/>
+            </p>
         </div>
         <div id="blogComment">
             <ul>
@@ -59,9 +65,9 @@
 </div>
 
 
-    <script src="./js/axios.js"></script>
-    <script type="text/javascript" src="./js/vue.js"></script>
-    <script src="./js/base.js"></script>
-    <script src="./js/blogDetail.js"></script>
+<script src="./js/axios.js"></script>
+<script type="text/javascript" src="./js/vue.js"></script>
+<script src="./js/base.js"></script>
+<script src="./js/comment.js"></script>
 </body>
 </html>

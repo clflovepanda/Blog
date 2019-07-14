@@ -73,3 +73,10 @@ app.get("/blog/getBlogDetail", function (request, response) {
        return;
    })
 });
+
+app.get("/blog/getAllBlogMsg", function (request, response) {
+    blogDao.queryAllBlog(function (result) {
+        response.writeHead(200);
+        response.end(JSON.stringify(result));
+    });
+});

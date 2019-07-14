@@ -44,7 +44,7 @@ function addViews(id, success) {
     connection.end();
 }
 function queryAllBlog(success) {
-    var sql = "select * from blog;";
+    var sql = "select id, title, author, views, ctime, tags from blog;";
     var connection = dbUtil.createConnection();
     connection.connect();
     connection.query(sql, function (error, result) {

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link href="css/base.css" rel="stylesheet" />
-    <link href="css/blogDetail.css" rel="stylesheet">
+    <link href="css/about.css" rel="stylesheet" />
 </head>
 <body>
 <nav class="header">
@@ -22,10 +22,19 @@
 </nav>
 <div class="content">
     <div class="content_left">
-        <div id="blogDetail">
-            <h1>{{content.title}}</h1>
-            <span>作者: {{content.author}} 发布于: {{content.ctime}} 浏览({{content.views}})</span>
-            <div id="blog_content" v-html="content.content"></div>
+        <div id="about">
+            <h1>关于我</h1>
+            <p>
+                博主郑晓，性别男，卷葱省。<br/>
+                <br/>
+                会修电脑的野生程序员<br/>
+                认为PHP是世界上最好的语言<br/>
+                花括号不换行<br/>
+                7年PHP开发<br/>
+                电商行业<br/>
+                <br/>
+                我的书单：https://book.douban.com/people/58553308/<br/>
+                我的知乎：https://www.zhihu.com/people/zheng-xiao-93-51/activities</p><br/>
         </div>
         <div id="blogComment">
             <ul>
@@ -59,9 +68,9 @@
 </div>
 
 
-    <script src="./js/axios.js"></script>
-    <script type="text/javascript" src="./js/vue.js"></script>
-    <script src="./js/base.js"></script>
-    <script src="./js/blogDetail.js"></script>
+<script src="./js/axios.js"></script>
+<script type="text/javascript" src="./js/vue.js"></script>
+<script src="./js/base.js"></script>
+<script src="./js/about.js"></script>
 </body>
 </html>
