@@ -110,6 +110,35 @@ function queryBlogById(id, success) {
     });
     connection.end();
 }
+function queryBlogBySearch(search, success) {
+    var sql = "select * from blog where title like concat(concat('%', ?), '%') or content like concat(concat('%', ?), '%');";
+    var params = [search, search];
+    var connection = dbUtil.createConnection();
+    connection.connect();
+    connection.query(sql, params, function (error, result) {
+        if (error) {
+            console.log(error);
+        } else {
+            success(result);
+        }
+    });
+    connection.end();
+}
+
+function queryBlogBySearchCount(search, success) {
+    var sql = "select count(1) from blog where title like \"%?%\" or content like \"%?%\";";
+    var params = [search, search];
+    var connection = dbUtil.createConnection();
+    connection.connect();
+    connection.query(sql, params, function (error, result) {
+        if (error) {
+            console.log(error);
+        } else {
+            success(result);
+        }
+    });
+    connection.end();
+}
 
 module.exports.insertBlog = insertBlog;
 module.exports.deleteBlog = deleteBlog;
@@ -119,4 +148,6 @@ module.exports.queryBlogCount = queryBlogCount;
 module.exports.queryBlogByPage = queryBlogByPage;
 module.exports.queryBlogByViews = queryBlogByViews;
 module.exports.queryBlogById = queryBlogById;
+module.exports.queryBlogBySearch = queryBlogBySearch;
+module.exports.queryBlogBySearchCount = queryBlogBySearchCount;
 

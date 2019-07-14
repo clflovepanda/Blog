@@ -88,3 +88,25 @@ var pageTools = new Vue({
         });
     }
 });
+
+var search = new Vue({
+    el: "#search",
+    data: {
+        search: ""
+    },
+    methods: {
+        sendSearch: function () {
+            axios({
+                url: "/blog/search?search=" + this.search
+            }).then(function (resp) {
+                pageTools.total = resp.data.count;
+                pageTools.nowPage = 1;
+                pageTools.refresh();
+                blogList.list = resp.data.list;
+            });
+        }
+    },
+    computed: {
+
+    }
+});

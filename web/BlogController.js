@@ -80,3 +80,21 @@ app.get("/blog/getAllBlogMsg", function (request, response) {
         response.end(JSON.stringify(result));
     });
 });
+
+app.get("/blog/search", function (request, response) {
+    var params = url.parse(request.url, true).query;
+    if (!params.search) {
+        response.writeHead(400);
+        response.end("must have be search");
+        return;
+    }
+    console.log(params.search);
+    blogDao.queryBlogBySearch(params.search, function (result) {
+        console.log(result);
+        blogDao.queryBlogBySearchCount(params.search, function (count) {
+            console.log(result);
+            response.writeHead(200);
+            response.end(JSON.stringify({count: count, list: result}));
+        });
+    });
+});
